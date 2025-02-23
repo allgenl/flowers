@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Button, Card, CardContent, Typography } from "@mui/material";
+import { Button, Card, CardContent, Stack, Typography } from "@mui/material";
 import styled from "styled-components";
 
 const questions = [
@@ -162,7 +162,7 @@ const FlowerQuiz = () => {
 
 export default FlowerQuiz;
 
-const StyledContainer = styled("div")(() => ({
+const StyledContainer = styled(Stack)(() => ({
   minHeight: "100vw",
   display: "flex",
 }));
