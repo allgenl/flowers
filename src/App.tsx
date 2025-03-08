@@ -1,34 +1,35 @@
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Button, Card, CardContent, Stack, Typography } from "@mui/material";
-import styled from "styled-components";
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { Button, Card, CardContent, Stack, Typography } from '@mui/material';
+import styled from 'styled-components';
+
+const flowers = ['🌹', '🌷', '🌺', '🏵', '🌼', '🌻', '🌸', '🪻'];
 
 const questions = [
   {
-    question: "Какой твой идеальный день?",
+    question: 'Выбери традицию',
     options: [
-      { text: "Активный и насыщенный", flower: "Подсолнух" },
-      { text: "Спокойный и умиротворенный", flower: "Лаванда" },
-      { text: "Романтичный и мечтательный", flower: "Роза" },
-      { text: "Веселый и яркий", flower: "Тюльпан" },
+      { text: 'Смеёшься сам — рассмеши другого', flower: 'Подсолнух' },
+      { text: 'Покушал сам — покорми другого', flower: 'Роза' },
+      { text: 'Облюйся сам — облюй другого', flower: 'Лаванда' },
     ],
   },
   {
-    question: "Выбери цвет, который тебе нравится больше всего:",
+    question: 'Выбери цвет, который тебе нравится больше всего:',
     options: [
-      { text: "Желтый", flower: "Подсолнух" },
-      { text: "Фиолетовый", flower: "Лаванда" },
-      { text: "Красный", flower: "Роза" },
-      { text: "Розовый", flower: "Тюльпан" },
+      { text: 'Желтый', flower: 'Подсолнух' },
+      { text: 'Фиолетовый', flower: 'Лаванда' },
+      { text: 'Красный', flower: 'Роза' },
+      { text: 'Розовый', flower: 'Тюльпан' },
     ],
   },
   {
-    question: "Как бы тебя описали друзья?",
+    question: 'Как бы тебя описали друзья?',
     options: [
-      { text: "Энергичный и позитивный", flower: "Подсолнух" },
-      { text: "Спокойный и добрый", flower: "Лаванда" },
-      { text: "Чувственный и загадочный", flower: "Роза" },
-      { text: "Легкий на подъем и веселый", flower: "Тюльпан" },
+      { text: 'Энергичный и позитивный', flower: 'Подсолнух' },
+      { text: 'Спокойный и добрый', flower: 'Лаванда' },
+      { text: 'Чувственный и загадочный', flower: 'Роза' },
+      { text: 'Легкий на подъем и веселый', flower: 'Тюльпан' },
     ],
   },
 ];
@@ -50,9 +51,7 @@ const FlowerQuiz = () => {
         return acc;
       }, {});
 
-      const mostCommonFlower = Object.keys(flowerCounts).reduce((a, b) =>
-        flowerCounts[a] > flowerCounts[b] ? a : b
-      );
+      const mostCommonFlower = Object.keys(flowerCounts).reduce((a, b) => (flowerCounts[a] > flowerCounts[b] ? a : b));
 
       setResult(mostCommonFlower);
     }
@@ -61,15 +60,16 @@ const FlowerQuiz = () => {
   const Petal = () => {
     const randomX = Math.random() * window.innerWidth;
     const randomDuration = Math.random() * 5 + 3;
+    const randomFlower = flowers[Math.floor(Math.random() * flowers.length)];
     return (
       <motion.div
         initial={{ opacity: 0, y: -50, x: randomX }}
         animate={{ opacity: 1, y: window.innerHeight }}
-        transition={{ duration: randomDuration, ease: "linear" }}
+        transition={{ duration: randomDuration, ease: 'linear' }}
         className="absolute text-pink-400 text-4xl"
-        style={{ position: "absolute" }}
+        style={{ position: 'absolute' }}
       >
-        🌹
+        {randomFlower}
       </motion.div>
     );
   };
@@ -85,14 +85,9 @@ const FlowerQuiz = () => {
   }, []);
 
   return (
-    <StyledContainer
-      className="relative flex items-center justify-center min-h-screen bg-pink-50 overflow-hidden"
-      style={{ width: "100%" }}
-    >
+    <StyledContainer>
       {/* Контейнер для лепестков */}
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-        {petals}
-      </div>
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">{petals}</div>
 
       {/* Контейнер опроса */}
       <motion.div
@@ -100,15 +95,15 @@ const FlowerQuiz = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="relative z-10"
-        style={{ margin: "auto" }}
+        style={{ margin: 'auto', zIndex: '10' }}
       >
         <Card
           sx={{
-            backgroundColor: "#FFC0CB",
+            backgroundColor: '#FFC0CB',
             borderRadius: 4,
             boxShadow: 3,
             maxWidth: 400,
-            textAlign: "center",
+            textAlign: 'center',
             p: 2,
           }}
         >
@@ -123,7 +118,7 @@ const FlowerQuiz = () => {
                 </Typography>
                 <Button
                   variant="contained"
-                  sx={{ mt: 3, backgroundColor: "#E91E63" }}
+                  sx={{ mt: 3, backgroundColor: '#E91E63' }}
                   onClick={() => {
                     setCurrentQuestion(0);
                     setAnswers([]);
@@ -138,13 +133,13 @@ const FlowerQuiz = () => {
                 <Typography variant="h6" fontWeight="bold">
                   {questions[currentQuestion].question}
                 </Typography>
-                <div style={{ marginTop: "1rem" }}>
+                <div style={{ marginTop: '1rem' }}>
                   {questions[currentQuestion].options.map((option, index) => (
                     <Button
                       key={index}
                       variant="contained"
                       fullWidth
-                      sx={{ mt: 1, backgroundColor: "#F48FB1" }}
+                      sx={{ mt: 1, backgroundColor: '#F48FB1' }}
                       onClick={() => handleAnswer(option.flower)}
                     >
                       {option.text}
@@ -163,6 +158,9 @@ const FlowerQuiz = () => {
 export default FlowerQuiz;
 
 const StyledContainer = styled(Stack)(() => ({
-  minHeight: "100vw",
-  display: "flex",
+  width: '100vw',
+  height: '100vh',
+  display: 'flex',
+  margin: '0 auto',
+  zIndex: '10',
 }));
