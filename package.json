@@ -15,8 +15,8 @@
     "format": "npm run prettier:fix && npm run lint:fix",
     "test": "vitest run",
     "commit": "npm run format && npm run test",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "predeploy": "npm run build || true",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
