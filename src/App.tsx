@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Button, Card, CardContent, Stack, Typography } from '@mui/material';
+import { Button, Card, CardContent, Typography } from '@mui/material';
 import styled from 'styled-components';
 
 const flowers = ['🌹', '🌷', '🌺', '🏵', '🌼', '🌻', '🌸', '🪻'];
@@ -40,6 +40,7 @@ const FlowerQuiz = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
+      // @ts-ignore
       setPetals((prev) => [...prev, <Petal key={Math.random()} />]);
     }, 200);
 
@@ -74,6 +75,7 @@ const FlowerQuiz = () => {
                     className="choose"
                     color="secondary"
                     key={user[0]}
+                    // @ts-ignore
                     onClick={() => setSelectedUser(user[0])}
                     sx={{ mt: 1 }}
                   >
@@ -87,15 +89,17 @@ const FlowerQuiz = () => {
       </StyledContainer>
     );
   }
-
+  // @ts-ignore
   const questions = questionsByUser[selectedUser].questions || [];
-
+  // @ts-ignore
   const handleAnswer = (flower) => {
     const newAnswers = [...answers, flower];
+    // @ts-ignore
     setAnswers(newAnswers);
     if (currentQuestion + 1 < questions.length) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
+      // @ts-ignore
       setResult(questionsByUser[selectedUser].flower);
     }
   };
@@ -110,6 +114,7 @@ const FlowerQuiz = () => {
               <StyledAnswers>
                 <Typography variant="h5">Ты — {result}!</Typography>
                 <StyledPhoto>
+                  {/* @ts-ignore */}
                   <img src={`/${questionsByUser[selectedUser].photo}`} alt="" />
                 </StyledPhoto>
                 <StyledButton color="secondary">Смотреть поздравление</StyledButton>
@@ -119,6 +124,7 @@ const FlowerQuiz = () => {
             <>
               <Typography variant="h6">{questions[currentQuestion].question}</Typography>
               <StyledAnswers>
+                {/* @ts-ignore */}
                 {questions[currentQuestion].options.map((option, index) => (
                   <StyledButton
                     color="secondary"

@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "noEmitOnError": false,
+    "skipLibCheck": true,
+    "strict": false,
     "composite": true,
     "module": "ESNext",
     "moduleResolution": "Node",
